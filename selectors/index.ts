@@ -1,2 +1,5 @@
 import sample from './sample.json';
-export const sampleselect = sample;
+
+export class Selectors {
+    loginSelectors = sample
+}
