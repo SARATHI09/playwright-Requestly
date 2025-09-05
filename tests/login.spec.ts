@@ -10,9 +10,9 @@ test.describe("Login For Requestly", () => {
   const expectedUrl = `${baseUrl}/projects`;
   let loginPage: LoginPage;
   
-  test.beforeEach("Login",async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     await page.goto("/");
-    loginPage = new LoginPage(page,selector); 
+    loginPage = new LoginPage(page, selector);
     await loginPage.login(email, password);
     await expect(page).toHaveURL(expectedUrl);
   });

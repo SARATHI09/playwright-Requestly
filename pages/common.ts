@@ -18,11 +18,14 @@ export class LoginPage {
     await this.page.locator(this.selector.dropdown).getByText('Overall Admin').click();
     await this.page.locator(this.selector.profileicon).click();
     console.log('????',this.selector.dropdown);
-    await this.page.locator(this.selector.dropdown).getByText('Masters').click();
+    await this.page.locator(this.selector.dropdown).getByText('Masters').click({force:true});
+
+    console.log('???????????',process.env.BaseUrl! + '/masters')
+    await expect(this.page).toHaveURL(process.env.BaseUrl! + '/masters');
+    console.log('??',this.page.getByText('+ Add Company'))
     await this.page.getByText('+ Add Company').click();
     await this.page.getByText('Employee Master').click();
-    // console.log('????',await this.page.url());
-    // await expect(this.page.locator('h1')).toHaveText('Masters'); 
+ 
 
   }
   async logout() {
