@@ -8,20 +8,21 @@ test.describe("Login Tests", () => {
   const email = process.env.Email!;
   const baseUrl = process.env.BaseUrl!;
   const expectedUrl = `${baseUrl}/projects`;
-
+  
+  let loginPage: LoginPage;
+  
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
-    const loginPage = new LoginPage(page,selector); 
+    loginPage = new LoginPage(page, selector);
     await loginPage.login(email, password);
     await expect(page).toHaveURL(expectedUrl);
   });
+  
   test("Company & Employee Creation", async ({ page }) => {
-    const loginPage = new LoginPage(page,selector); 
     await loginPage.roleSwitch();
   });
 
   test("logout", async ({ page }) => {
-    const loginPage = new LoginPage(page,selector); 
     await loginPage.logout();
     await expect(page).toHaveURL("/login");
   });
