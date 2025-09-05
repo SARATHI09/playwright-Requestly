@@ -1,5 +1,5 @@
-import sample from './selectors.json';
+import common from './selectors.json';
 
 export class Selectors {
-    loginSelectors = sample.login
+    loginSelectors = common.login
 }

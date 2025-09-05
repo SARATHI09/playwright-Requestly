@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../pages/common";
+import { AdminRole } from "../pages/overAllAdminpage";
 import { Selectors } from "../selectors";
 
 test.describe("Login Tests", () => {
@@ -10,6 +11,7 @@ test.describe("Login Tests", () => {
   const expectedUrl = `${baseUrl}/projects`;
   
   let loginPage: LoginPage;
+  let adminrole:AdminRole;
   
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
@@ -19,7 +21,9 @@ test.describe("Login Tests", () => {
   });
   
   test("Company & Employee Creation", async ({ page }) => {
+    adminrole = new AdminRole(page, selector);
     await loginPage.roleSwitch();
+    await adminrole.overAllAdmin();
   });
 
   test("logout", async ({ page }) => {
