@@ -1,0 +1,16 @@
+{
+    "login":{
+    "email":"Enter your email",
+    "password":"Enter your password",
+    "loginbtn":"Log in",
+    "profileicon":"//*[@class='profile']",
+    "dropdown":"//*[@role='menu']",
+    "roleChange":"//*[@class='role-text']",
+    "conformPassword":"//*[type='password']",
+    "resetSubmit":"//*[type='submit']"
+},
+    "createCompany":{
+        
+    }
+
+}

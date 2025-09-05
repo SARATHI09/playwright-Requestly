@@ -15,6 +15,10 @@ test.describe("Login Tests", () => {
     await loginPage.login(email, password);
     await expect(page).toHaveURL(expectedUrl);
   });
+  test("Company & Employee Creation", async ({ page }) => {
+    const loginPage = new LoginPage(page,selector); 
+    await loginPage.roleSwitch();
+  });
 
   test("logout", async ({ page }) => {
     const loginPage = new LoginPage(page,selector); 

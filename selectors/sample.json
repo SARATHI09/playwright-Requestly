@@ -1,8 +1,0 @@
-{
-    
-    "email":"Enter your email",
-    "password":"Enter your password",
-    "login":"Log in",
-    "profileicon":"//*[@class='profile']",
-    "profileDropdown":"//*[@role='menu']"
-}

@@ -12,10 +12,17 @@ export class LoginPage {
     await this.page.getByPlaceholder(this.selector.email).fill(email);
     
     await this.page.getByPlaceholder(this.selector.password).fill(password);
-    await this.page.getByText(this.selector.login).click();
+    await this.page.getByText(this.selector.loginbtn).click();
+  }
+  async roleSwitch(){
+    await this.page.locator(this.selector.roleChange).click();
+    await this.page.locator(this.selector.dropdown).getByText('Overall Admin').click();
+    await this.page.locator(this.selector.profileicon).click();
+    await this.page.locator(this.selector.dropdown).getByText('Masters').click();
   }
   async logout() {
     await this.page.locator(this.selector.profileicon).click();
-    await this.page.locator(this.selector.profileDropdown).getByText("Logout").click();
+    await this.page.locator(this.selector.dropdown).getByText("Logout").click();
   }
+  
 }
