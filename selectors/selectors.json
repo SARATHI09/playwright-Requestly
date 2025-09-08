@@ -1,16 +1,22 @@
 {
     "login":{
-    "email":"Enter your email",
-    "password":"Enter your password",
-    "loginbtn":"Log in",
-    "profileicon":"//*[@class='profile']",
-    "dropdown":"//*[@role='menu']",
-    "roleChange":"//*[@class='role-text']",
-    "conformPassword":"//*[type='password']",
-    "resetSubmit":"//*[type='submit']"
+        "email":"Enter your email",
+        "password":"Enter your password",
+        "loginbtn":"Log in",
+        "profileicon":"//*[@class='profile']",
+        "dropdown":"//*[@role='menu']",
+        "roleChange":"//*[@class='role-text']",
+        "conformPassword":"Confirm Password",
+        "resetSubmit":"Submit",
+        "masters":"Masters",
+        "fieldDropdown":"ul[role='listbox']",
+        "yopEmail":"input[id='login']",
+        "yopsubmit":"div[id='refreshbut']",
+        "yopRefresh":"button[id='refresh']"
 },
     "createCompany":{
-        
+        "country":"//*[normalize-space()= 'Country']",
+        "empCompanyName":"//*[normalize-space()='Company']"
     }
 
 }

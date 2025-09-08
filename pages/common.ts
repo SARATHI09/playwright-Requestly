@@ -16,21 +16,38 @@ export class LoginPage {
   async roleSwitch(){
     await this.page.locator(this.selector.roleChange).click();
     await this.page.locator(this.selector.dropdown).getByText('Overall Admin').click();
-    await this.page.locator(this.selector.profileicon).click();
-    console.log('????',this.selector.dropdown);
-    await this.page.locator(this.selector.dropdown).getByText('Masters').click({force:true});
-
-    console.log('???????????',process.env.BaseUrl! + '/masters')
-    await expect(this.page).toHaveURL(process.env.BaseUrl! + '/masters');
-    console.log('??',this.page.getByText('+ Add Company'))
-    await this.page.getByText('+ Add Company').click();
-    await this.page.getByText('Employee Master').click();
- 
-
+    await expect(this.page.locator(this.selector.roleChange)).toHaveText('Overall Admin');
+    await Promise.all([ 
+      this.page.locator(this.selector.profileicon).click(),
+      expect(this.page.getByRole('menuitem', { name: 'Masters' })).toBeVisible(),
+      this.page.getByRole('menuitem', { name: 'Masters' }).click({force:true}),
+    ]);
+    await this.page.waitForURL(process.env.BaseUrl! + '/masters') 
+  
   }
   async logout() {
     await this.page.locator(this.selector.profileicon).click();
     await this.page.locator(this.selector.dropdown).getByText("Logout").click();
+  }
+  async activationEmail(yop:any){
+ for (const loginData of yop){
+  const{email,password}=loginData;
+  await this.page.goto(process.env.YOPBaseURL!);
+  console.log('??',email);
+  await this.page.locator(this.selector.yopEmail).fill(email);
+  await this.page.locator(this.selector.yopsubmit).click();
+  await this.page.locator(this.selector.yopRefresh).click();
+  await this.page.waitForTimeout(3000);
+  const frame = this.page.frameLocator("#ifmail");
+
+  await frame.locator("a[href*='verifyingEmail']").first().waitFor();
+  const activationLink = await frame.locator("a[href*='verifyingEmail']").first().getAttribute("href");
+  console.log("Found activation link:", activationLink);
+  await this.page.goto(activationLink!);
+  await this.page.getByPlaceholder(this.selector.password).fill(password);
+  await this.page.getByPlaceholder(this.selector.conformPassword).fill(password);
+  await this.page.getByText(this.selector.resetSubmit).click();
+ }
   }
   
 }

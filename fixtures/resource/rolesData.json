@@ -1,0 +1,81 @@
+{
+  "P": [
+    [
+      {
+        "company": "Rau, Corkery and Herman",
+        "country": "Brazil",
+        "empName": "Concepcion",
+        "designation": "Trainee",
+        "email": "concepcion410@yopmail.com",
+        "password": "Concepcion@609",
+        "role": "Project Creator"
+      }
+    ],
+    [
+      {
+        "company": "Rau, Corkery and Herman",
+        "country": "Brazil",
+        "empName": "Angelina",
+        "designation": "Manager",
+        "email": "angelina435@yopmail.com",
+        "password": "Angelina@355",
+        "role": [
+          "Project Creator",
+          "Reviewer"
+        ]
+      }
+    ]
+  ],
+  "C": [],
+  "R": [],
+  "O": [
+    [
+      {
+        "company": "Rau, Corkery and Herman",
+        "country": "Brazil",
+        "empName": "Meagan",
+        "designation": "MD",
+        "email": "meagan414@yopmail.com",
+        "password": "Meagan@725",
+        "role": [
+          "Overall Admin",
+          "Reviewer",
+          "Management"
+        ]
+      }
+    ],
+    [
+      {
+        "company": "Rau, Corkery and Herman",
+        "country": "Brazil",
+        "empName": "Gennaro",
+        "designation": "Tester",
+        "email": "gennaro650@yopmail.com",
+        "password": "Gennaro@351",
+        "role": [
+          "Overall Admin",
+          "Management",
+          "Custodian",
+          "Reviewer"
+        ]
+      }
+    ]
+  ],
+  "M": [
+    [
+      {
+        "company": "Rau, Corkery and Herman",
+        "country": "Brazil",
+        "empName": "Therese",
+        "designation": "Tester",
+        "email": "therese861@yopmail.com",
+        "password": "Therese@374",
+        "role": [
+          "Management",
+          "Reviewer",
+          "Custodian"
+        ]
+      }
+    ]
+  ]
+}
