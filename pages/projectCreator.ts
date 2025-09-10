@@ -65,5 +65,7 @@ export class ProjectCreatorPage {
     
     await this.page.getByText(this.selector.submitButton).click();
     await expect(this.page).toHaveURL(/.*\/projects\/\d+\/requirements$/);
+
+    
   }
 }

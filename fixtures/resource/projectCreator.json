@@ -1,0 +1,120 @@
+{
+  "P": [
+    {
+      "empName": "Lolita",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Chanel",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Jaylin",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Vicenta",
+      "company": "Bartell - Pfeffer"
+    }
+  ],
+  "C": [
+    {
+      "empName": "Haleigh",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Chanel",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Nash",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Jewell",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Skylar",
+      "company": "Bartell - Pfeffer"
+    }
+  ],
+  "R": [
+    {
+      "empName": "Haleigh",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Lolita",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Vicenta",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Nash",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Glen",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Skylar",
+      "company": "Bartell - Pfeffer"
+    }
+  ],
+  "O": [
+    {
+      "empName": "Chanel",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Vicenta",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Weldon",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Nash",
+      "company": "Bartell - Pfeffer"
+    }
+  ],
+  "M": [
+    {
+      "empName": "Haleigh",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Lolita",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Chanel",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Jaylin",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Vicenta",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Weldon",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Nash",
+      "company": "Bartell - Pfeffer"
+    },
+    {
+      "empName": "Jewell",
+      "company": "Bartell - Pfeffer"
+    }
+  ]
+}

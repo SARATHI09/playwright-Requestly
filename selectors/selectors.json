@@ -3,7 +3,7 @@
         "email":"Enter your email",
         "password":"Enter your password",
         "loginbtn":"Log in",
-        "forgotPassword":"Forgot password",
+        "forgot":"Forgot password",
         "microsoftLogin":"Microsoft Login",
         "profileicon":"//*[@class='profile']",
         "profileIconText":"M",

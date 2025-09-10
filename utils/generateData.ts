@@ -26,7 +26,7 @@ export const toCamelCase = (text: string): string => {
     .replace(/\s+/g, '');
 }
 
-export function generateMultipleEmployees(count=5) {
+export function generateMultipleEmployees(count=10) {
   return Array.from({ length: count }, () => generateData());
 }
 

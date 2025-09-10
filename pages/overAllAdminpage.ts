@@ -13,7 +13,7 @@ export class AdminRole {
   async overAllAdmin(data :any) {
     let rolesData: any = { P: [], C: [], R: [], O: [], M: [] };
     let details: any[] = [];
-
+     let projectCreatorData: any = { P: [], C: [], R: [], O: [], M: [] }; 
     const {companyName,country}=data
     await this.page.getByText('+ Add Company').click();
     await this.page.getByPlaceholder('Company Name').fill(companyName);
@@ -68,10 +68,24 @@ export class AdminRole {
       if (key && rolesData[key]) {
         rolesData[key].push(empObj); 
       }
+
+      for (const role of roleArray) {
+        const key = roleMap[role];
+        if (key && rolesData[key]) {
+          rolesData[key].push(empObj);
+        }
+
+        if (key && projectCreatorData[key]) {
+          projectCreatorData[key].push({
+            empName,
+            company: companyName
+          });
+        }
     }
     writeJSON("fixtures/resource/rolesData.json",rolesData );
     writeJSON("fixtures/resource/activateDetails.json", details);
-
+    writeJSON("fixtures/resource/projectCreator.json", projectCreatorData);
   }
   
+}
 }
