@@ -13,6 +13,36 @@ export class LoginPage {
     await this.page.getByPlaceholder(this.selector.password).fill(password);
     await this.page.getByText(this.selector.loginbtn).click();
   }
+
+  async microsoftLogin() {
+    await this.page.getByText(this.selector.microsoftLogin).click();
+    // Wait for Microsoft login page to load
+    await this.page.waitForLoadState('networkidle');
+  }
+  async microsoftLoginWithEmail(email: string) {
+    await this.page.getByText(this.selector.microsoftLogin).click();
+    // Wait for Microsoft login page to load
+    await this.page.waitForLoadState('networkidle');
+    // Fill email if on Microsoft login page
+    try {
+      await this.page.getByPlaceholder('Email, phone, or Skype').fill(email);
+      await this.page.getByText('Next').click();
+    } catch (error) {
+      console.log('Microsoft login page not loaded or different structure');
+    }
+  }
+  async clickProfileIcon() {
+    await this.page.getByText(this.selector.profileIconText).click();
+    await expect(this.page.getByRole('menuitem', { name: this.selector.myProfile })).toBeVisible();
+  }
+  async goToMyProfile() {
+    await this.clickProfileIcon();
+    await this.page.getByRole('menuitem', { name: this.selector.myProfile }).click();
+  }
+  async logout() {
+    await this.clickProfileIcon();
+    await this.page.getByRole('menuitem', { name: this.selector.logout }).click();
+  }
   async roleSwitch(){
     await this.page.locator(this.selector.roleChange).click();
     await this.page.locator(this.selector.dropdown).getByText('Overall Admin').click();
@@ -24,10 +54,6 @@ export class LoginPage {
     ]);
     await this.page.waitForURL(process.env.BaseUrl! + '/masters') 
   
-  }
-  async logout() {
-    await this.page.locator(this.selector.profileicon).click();
-    await this.page.locator(this.selector.dropdown).getByText("Logout").click();
   }
   async activationEmail(yop:any){
  for (const loginData of yop){

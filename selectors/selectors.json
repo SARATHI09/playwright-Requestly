@@ -3,7 +3,12 @@
         "email":"Enter your email",
         "password":"Enter your password",
         "loginbtn":"Log in",
+        "forgotPassword":"Forgot password",
+        "microsoftLogin":"Microsoft Login",
         "profileicon":"//*[@class='profile']",
+        "profileIconText":"M",
+        "myProfile":"My Profile",
+        "logout":"Logout",
         "dropdown":"//*[@role='menu']",
         "roleChange":"//*[@class='role-text']",
         "conformPassword":"Confirm Password",
@@ -17,6 +22,29 @@
     "createCompany":{
         "country":"//*[normalize-space()= 'Country']",
         "empCompanyName":"//*[normalize-space()='Company']"
+    },
+    "projectCreator":{
+        "addProject":"Add Project",
+        "projectName":"Project Name",
+        "projectGroup":"Select a Project Group",
+        "addNewProjectGroup":"Add new Project Group",
+        "projectGroupName":"Enter Project Group Name",
+        "createProjectGroup":"Create",
+        "startDate":"Start Date",
+        "endDate":"End Date",
+        "projectDescription":"Project Description",
+        "company":"Company",
+        "saveAndNext":"Save & Next",
+        "addPeople":"+ Add People",
+        "projectCreatorDropdown":"Name",
+        "addTeamMember":"Add",
+        "nextButton":"Next",
+        "reminderEscalationYes":"Yes",
+        "reminderEscalationNo":"No",
+        "reminderDropdown":"Select the Frequency",
+        "escalation1Dropdown":"Select the Frequency",
+        "dailyOption":"Daily",
+        "pastDueDaily":"Past due - Daily",
+        "submitButton":"Submit"
     }
-
 }

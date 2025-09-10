@@ -1,0 +1,16 @@
+{
+  "project1": {
+    "projectName": "Test Project Alpha",
+    "projectGroupName": "Test Group Alpha",
+    "description": "This is a test project description for automation testing purposes. It contains less than 250 characters as required for the project creation flow.",
+    "companyName": "Cummerata LLC",
+    "teamMemberName": "Joana"
+  },
+  "project2": {
+    "projectName": "Test Project Beta",
+    "projectGroupName": "Test Group Beta", 
+    "description": "This is another test project description for automation testing purposes. It contains less than 250 characters as required for the project creation flow.",
+    "companyName": "Cummerata LLC",
+    "teamMemberName": "Reed"
+  }
+}

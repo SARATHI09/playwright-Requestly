@@ -30,6 +30,10 @@ export function generateMultipleEmployees(count=5) {
   return Array.from({ length: count }, () => generateData());
 }
 
+export function generateProjectGroupName(): string {
+  const data = generateData();
+  return `${data.empName} ${data.designation} Group`;
+}
 
 export function generateData() {
   const companyName = faker.company.name();

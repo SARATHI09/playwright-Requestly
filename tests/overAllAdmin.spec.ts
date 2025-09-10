@@ -3,7 +3,6 @@ import { LoginPage } from "../pages/common";
 import { AdminRole } from "../pages/overAllAdminpage";
 import { Selectors } from "../selectors";
 import { generateData } from "../utils/generateData";
-import detail from "../fixtures/resource/activateDetails.json"
 
 test.describe("Login Tests", () => {
   const selector = new Selectors();
@@ -28,10 +27,10 @@ test.describe("Login Tests", () => {
     const data = generateData();
     await adminrole.overAllAdmin(data);
   });
-  
+
   test("Activation Email", async ({ page }) => {
-    let yop = detail;
-    await loginPage.activationEmail(yop);
+    const detail = require('../fixtures/resource/activateDetails.json');
+    await loginPage.activationEmail(detail);
   });
 
   test("logout", async ({ page }) => {
