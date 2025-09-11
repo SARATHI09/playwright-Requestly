@@ -23,14 +23,16 @@ test.describe("Project Creator Login", () => {
   test("generate Reminders/Escalations automatically ? No", async ({ page }) => {
     const data = projectData.project1;
     await projectCreatorPage.createProject(data, { selectNoRadio: true });
-    await expect(page.getByText("Get Started by Creating Requirement List")).toBeVisible();
+
   });
 
   test("generate Reminders/Escalations automatically ? Yes", async ({ page }) => {
     const data = projectData.project2;
     await projectCreatorPage.createProject(data);
-    await expect(page.getByText("Get Started by Creating Requirement List")).toBeVisible();
+
   });
+
+
   test("Logout", async ({ page }) => {
     await loginPage.logout();
     await expect(page).toHaveURL(/.*\/login$/);

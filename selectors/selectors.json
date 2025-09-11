@@ -3,7 +3,6 @@
         "email":"Enter your email",
         "password":"Enter your password",
         "loginbtn":"Log in",
-        "forgot":"Forgot password",
         "microsoftLogin":"Microsoft Login",
         "profileicon":"//*[@class='profile']",
         "myProfile":"My Profile",
@@ -44,6 +43,31 @@
         "escalation1Dropdown":"Select the Frequency",
         "dailyOption":"Daily",
         "pastDueDaily":"Past due - Daily",
-        "submitButton":"Submit"
+        "submitButton":"Submit",
+        "reminderinfo":"#escalation_remainderId",
+        "escalation1info":"#escalation_escalation1Id",
+        "escalation2info":"#escalation_escalation2Id",
+        "escalation3info":"#escalation_escalation3Id",
+        "escalation4info":"#escalation_escalation4Id"
+    },
+    "requirementList":{
+        "headerProjectInfo":"Project Info",
+        "requestButton":"Request",
+        "cancelButton":"Cancel",
+        "requirementTitle":"Requirement Title",
+        "priorityDropdown":"Select Priority",
+        "dueDatePlaceholder":"DD-MM-YYYY",
+        "processCategory":"Category",
+        "department":"Department",
+        "dataRequirement":"//textarea[@id='horizontal_login_datarequirement']",
+        "companyDropdown":"Select Company",
+        "custodianDropdown":"Select Custodian",
+        "reviewerDropdown":"Select Reviewer",
+        "reviewerDueDatePlaceholder":"DD-MM-YYYY",
+        "escalation1":"Select Escalation 1",
+        "escalation2":"Select Escalation 2",
+        "escalation3":"Select Escalation 3",
+        "escalation4":"Select Escalation 4",
+        "priorityOptions":["High","Medium","Low"]
     }
 }

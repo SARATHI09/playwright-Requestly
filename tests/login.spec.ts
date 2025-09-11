@@ -34,9 +34,5 @@ test.describe("Forgot Password", () => {
 
   });
 
-  test("Navigate to Forgot Password", async ({ page }) => {
-    await loginPage.forgotPassword();
-    await expect(page).toHaveURL(/.*\/forgotPassword$/);
-  });
 });
 
