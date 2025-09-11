@@ -18,7 +18,7 @@ export class LoginPage {
   }
 
   async clickProfileIcon() {
-    await this.page.getByText(this.selector.profileIconText).click();
+    await this.page.locator(this.selector.profileicon).click();
     await expect(this.page.getByRole('menuitem', { name: this.selector.myProfile })).toBeVisible();
   }
   async goToMyProfile() {

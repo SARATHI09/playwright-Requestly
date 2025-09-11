@@ -6,7 +6,6 @@
         "forgot":"Forgot password",
         "microsoftLogin":"Microsoft Login",
         "profileicon":"//*[@class='profile']",
-        "profileIconText":"M",
         "myProfile":"My Profile",
         "logout":"Logout",
         "dropdown":"//*[@role='menu']",

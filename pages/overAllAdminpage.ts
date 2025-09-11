@@ -45,7 +45,7 @@ export class AdminRole {
 
       const userDetails = { email, password };
       details.push(userDetails);
-      const empObj = [{
+      const empObj = {
         company: companyName,
         country,
         empName,
@@ -53,7 +53,7 @@ export class AdminRole {
         email,
         password,
         role: roleSets,
-      }];
+      };
       const roleMap: any = {
         "Project Creator": "P",
         "Custodian": "C",
