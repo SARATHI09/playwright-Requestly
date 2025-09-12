@@ -43,7 +43,7 @@ export class AdminRole {
         }
       await this.page.getByText('Save').click();
 
-      const userDetails = { email, password };
+      const userDetails = { empName,email, password };
       details.push(userDetails);
       const empObj = [{
         company: companyName,

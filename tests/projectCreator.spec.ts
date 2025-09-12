@@ -3,7 +3,7 @@ import { LoginPage } from "../pages/common";
 import { ProjectCreatorPage } from "../pages/projectCreator";
 import { Selectors } from "../selectors";
 import rolesData from "../fixtures/resource/rolesData.json";
-import projectData from "../fixtures/resource/projectData.json";
+import { generateRequirementData, generateProjectCreationData } from "../utils/generateData";
 
 test.describe("Project Creator Login", () => {
   const selector = new Selectors();
@@ -13,6 +13,8 @@ test.describe("Project Creator Login", () => {
   let loginPage: LoginPage;
   let projectCreatorPage: ProjectCreatorPage;
   
+  // Use a fixed company name so repeats pick the same
+
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
     loginPage = new LoginPage(page, selector);
@@ -21,15 +23,9 @@ test.describe("Project Creator Login", () => {
     await expect(page).toHaveURL(/.*\/projects$/);
   });
   test("generate Reminders/Escalations automatically ? No", async ({ page }) => {
-    const data = projectData.project1;
-    await projectCreatorPage.createProject(data, { selectNoRadio: true });
-
-  });
-
-  test("generate Reminders/Escalations automatically ? Yes", async ({ page }) => {
-    const data = projectData.project2;
-    await projectCreatorPage.createProject(data);
-
+    const data = generateProjectCreationData();
+    await projectCreatorPage.createProject(data, { selectNoRadio:  Math.random() > 0.5 });
+    
   });
 
 

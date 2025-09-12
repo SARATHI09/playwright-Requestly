@@ -7,24 +7,11 @@ export function writeJSON(filePath: string, data: any) {
 
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
 }
-export const generateRandomEmail = (): string => {
-  const randomStr = Math.random().toString(36).substring(7);
-  return `testuser_${randomStr}@example.com`;
-};
 
 export const generateRandomString = (length: number): string => {
   return Math.random().toString(36).substring(2, length + 2);
 };
 
-export const toCamelCase = (text: string): string => {
-  return text
-    .trim()
-    .toLowerCase()
-    .replace(/(?:^\w|[A-Z]|\b\w)/g, (match, index) =>
-      index === 0 ? match.toLowerCase() : match.toUpperCase()
-    )
-    .replace(/\s+/g, '');
-}
 
 export function generateMultipleEmployees(count=10) {
   return Array.from({ length: count }, () => generateData());
@@ -64,4 +51,45 @@ export function generateData() {
     password,
     roleSets
   }
+}
+
+export type PriorityLevel = 'High' | 'Medium' | 'Low';
+
+export interface RequirementData {
+  title: string;
+  priority: PriorityLevel;
+  processCategory: string;
+  department: string;
+  dataRequirement: string;
+  dueDateDay?: number; // calendar day to click, default 15
+  reviewerDueDateDay?: number; // calendar day to click, default 15
+}
+
+export function generateRequirementData(): RequirementData {
+  const priorityOptions: PriorityLevel[] = ['High','Medium','Low'];
+  const title = `Req ${generateRandomString(6)}`;
+  const priority = priorityOptions[Math.floor(Math.random() * priorityOptions.length)];
+  const processCategory = faker.commerce.department().toLowerCase();
+  const department = faker.commerce.productAdjective().toLowerCase();
+  const dataRequirement = faker.lorem.words({ min: 3, max: 7 });
+  const dueDateDay = 15;
+  const reviewerDueDateDay = 15;
+  return { title, priority, processCategory, department, dataRequirement, dueDateDay, reviewerDueDateDay };
+}
+
+export interface ProjectCreationData {
+  projectName: string;
+  projectGroupName: string;
+  description: string;
+  companyName: string;
+  teamMemberName: string;
+}
+
+export function generateProjectCreationData(options?: { companyName?: string; teamMemberName?: string; }): ProjectCreationData {
+  const projectName = `Test Project ${faker.word.noun()} ${faker.number.int({ min: 100, max: 999 })}`;
+  const projectGroupName = `Test Group ${faker.word.adjective()} ${faker.number.int({ min: 100, max: 999 })}`;
+  const description = faker.lorem.sentence(20).slice(0, 240);
+  const companyName = options?.companyName ?? 'Erdman and Sons';
+  const teamMemberName = options?.teamMemberName ?? 'Aidan';
+  return { projectName, projectGroupName, description, companyName, teamMemberName };
 }
