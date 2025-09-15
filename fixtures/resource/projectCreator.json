@@ -1,108 +1,92 @@
 {
   "P": [
     {
-      "empName": "Otis",
-      "company": "Schuster Group"
+      "empName": "Mckayla",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Riley",
-      "company": "Schuster Group"
-    },
-    {
-      "empName": "Bernard",
-      "company": "Schuster Group"
-    },
-    {
-      "empName": "Angelo",
-      "company": "Schuster Group"
-    },
-    {
-      "empName": "Ola",
-      "company": "Schuster Group"
+      "empName": "Marta",
+      "company": "Kozey, Witting and Goldner"
     }
   ],
   "C": [
     {
-      "empName": "Kamren",
-      "company": "Schuster Group"
+      "empName": "Sabrina",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Riley",
-      "company": "Schuster Group"
+      "empName": "Angelita",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Bernard",
-      "company": "Schuster Group"
+      "empName": "Brianne",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Angelo",
-      "company": "Schuster Group"
-    },
-    {
-      "empName": "Bertha",
-      "company": "Schuster Group"
+      "empName": "Larry",
+      "company": "Kozey, Witting and Goldner"
     }
   ],
   "R": [
     {
-      "empName": "Kamren",
-      "company": "Schuster Group"
+      "empName": "Sabrina",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Ismael",
-      "company": "Schuster Group"
+      "empName": "Angelita",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Bernard",
-      "company": "Schuster Group"
+      "empName": "Brianne",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Kariane",
-      "company": "Schuster Group"
+      "empName": "Kieran",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Winston",
-      "company": "Schuster Group"
-    },
-    {
-      "empName": "Angelo",
-      "company": "Schuster Group"
+      "empName": "Larry",
+      "company": "Kozey, Witting and Goldner"
     }
   ],
   "O": [
     {
-      "empName": "Kamren",
-      "company": "Schuster Group"
+      "empName": "Sabrina",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Kariane",
-      "company": "Schuster Group"
+      "empName": "Allan",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Winston",
-      "company": "Schuster Group"
+      "empName": "Elinore",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Ola",
-      "company": "Schuster Group"
+      "empName": "Kieran",
+      "company": "Kozey, Witting and Goldner"
     }
   ],
   "M": [
     {
-      "empName": "Kamren",
-      "company": "Schuster Group"
+      "empName": "Sabrina",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Riley",
-      "company": "Schuster Group"
+      "empName": "Angelita",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Bernard",
-      "company": "Schuster Group"
+      "empName": "Brianne",
+      "company": "Kozey, Witting and Goldner"
     },
     {
-      "empName": "Winston",
-      "company": "Schuster Group"
+      "empName": "Marta",
+      "company": "Kozey, Witting and Goldner"
+    },
+    {
+      "empName": "Larry",
+      "company": "Kozey, Witting and Goldner"
     }
   ]
 }

@@ -1,7 +1,7 @@
 import { Page, expect } from "@playwright/test";
 import { Selectors } from "../selectors/index";
 import type { RequirementData, ProjectCreationData } from "../utils/generateData";
-import { generateRequirementData} from "../utils/generateData";
+import { generateRequirementData } from "../utils/generateData";
 import rolesData from "../fixtures/resource/rolesData.json";
 import activateDetails from "../fixtures/resource/activateDetails.json";
 import projectCreatorData from "../fixtures/resource/projectCreator.json";
@@ -14,7 +14,7 @@ export class ProjectCreatorPage {
   selectedEscalation1Name: string = '';
   selectedProjectCreatorName: string = '';
   selectedRandomCompany: string = '';
-  selectedReviewerName: string ='';
+  selectedReviewerName: string = '';
   constructor(private page: Page, selectors: Selectors) {
     this.selector = selectors.projectCreatorSelectors;
     this.req = selectors.requirementListSelectors;
@@ -59,7 +59,7 @@ export class ProjectCreatorPage {
       }
     }
     throw new Error(`No valid team member found in dropdown. Tried all ${shuffledEmpNames.length} names: ${shuffledEmpNames.join(', ')}`);
-  } 
+  }
   private async selectCustodian(): Promise<string> {
     // Read from projectCreator.json C array (simpler structure)
     const allEmpNames = projectCreatorData.C.map(item => item.empName);
@@ -85,7 +85,7 @@ export class ProjectCreatorPage {
     // Remove duplicates (unique only)
     const uniqueEmpNames = [...new Set(allEmpNames)];
     // Exclude the custodian name if it was selected
-    const filteredEmpNames = this.selectedCustodianName 
+    const filteredEmpNames = this.selectedCustodianName
       ? uniqueEmpNames.filter(name => name !== this.selectedCustodianName)
       : uniqueEmpNames;
     // Shuffle the list randomly
@@ -100,7 +100,7 @@ export class ProjectCreatorPage {
         // If fails → continue with next
         continue;
       }
-    } 
+    }
     // If none match, throw an error
     throw new Error(`No valid reviewer found in dropdown. Tried: ${shuffledEmpNames.join(', ')}`);
   }
@@ -131,11 +131,11 @@ export class ProjectCreatorPage {
   }
 
   async createProject(projectData: ProjectCreationData, options?: { selectNoRadio?: boolean }) {
-    
+
     // Step 0: Project Info
     await this.page.getByText(this.selector.addProject).click();
     await expect(this.page).toHaveURL(/.*\/projects\/add\?step=0$/);
-    
+
     await this.page.getByPlaceholder(this.selector.projectName).fill(projectData.projectName);
     // Select project group - click dropdown and then + Add new Project Group
     await this.page.getByRole('combobox').filter({ hasText: this.selector.projectGroup }).click();
@@ -160,6 +160,7 @@ export class ProjectCreatorPage {
     await this.page.getByText(this.selector.addPeople).nth(1).click();
     await this.page.getByRole('combobox').click();
     const projectCreatorName = await this.selectProjectCreator();
+    this.selectedProjectCreatorName = projectCreatorName;
     await this.page.getByRole('button', { name: this.selector.addTeamMember }).nth(1).click();
     await expect(this.page.getByText('Project Team added succesfully')).toBeVisible();
     await this.page.getByText(this.selector.nextButton).click();
@@ -191,7 +192,7 @@ export class ProjectCreatorPage {
     await this.page.getByRole('option', { name: data.priority }).click();
     // Due Date
     await this.page.getByRole('textbox', { name: this.req.dueDatePlaceholder }).first().click();
-    await this.page.getByText(String(data.dueDateDay ?? 15)).click();
+    await this.selectDate(1)
     // Process/Category
     await this.page.getByPlaceholder(this.req.processCategory).fill(data.processCategory);
     // Department
@@ -201,19 +202,23 @@ export class ProjectCreatorPage {
     // Company
     await this.page.getByRole('combobox').filter({ hasText: this.req.companyDropdown }).click();
     const randomCompany = this.selectRandomCompanyFromP();
+    this.selectedRandomCompany = randomCompany;
     await this.page.getByRole('option', { name: randomCompany }).click();
     // Custodian - use random selection from C array
     await this.page.getByRole('combobox').filter({ hasText: this.req.custodianDropdown }).click();
-    const custodianName= await this.selectCustodian();
+    const custodianName = await this.selectCustodian();
+    this.selectedCustodianName = custodianName;
     // Reviewer - use random selection from R array
     await this.page.getByRole('combobox').filter({ hasText: this.req.reviewerDropdown }).click();
-   const reviewerName = await this.selectReviewer();
+    const reviewerName = await this.selectReviewer();
+    this.selectedReviewerName = reviewerName;
     // Reviewer Due Date
     await this.page.getByPlaceholder(this.req.reviewerDueDatePlaceholder).last().click();
     await this.page.getByText(String(data.reviewerDueDateDay ?? 15)).click();
     // Escalations - use the selected teamMemberName from activateDetails.json
     await this.page.getByRole('combobox').filter({ hasText: this.req.escalation1 }).click();
     const escalation1 = await this.selectTeamMember();
+    this.selectedEscalation1Name = escalation1;
     // Click header Request button
     await this.page.getByRole('button', { name: this.req.requestButton }).click();
   }

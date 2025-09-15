@@ -12,12 +12,10 @@ test.describe("Project Creator Login", () => {
   const password = projectCreatorData.password;
   let loginPage: LoginPage;
   let projectCreatorPage: ProjectCreatorPage;
-  
-  // Use a fixed company name so repeats pick the same
 
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
-    loginPage = new LoginPage(page, selector);
+   loginPage = new LoginPage(page, selector);
     projectCreatorPage = new ProjectCreatorPage(page, selector);
     await loginPage.login(email, password);
     await expect(page).toHaveURL(/.*\/projects$/);
@@ -27,12 +25,8 @@ test.describe("Project Creator Login", () => {
     await projectCreatorPage.createProject(data, { selectNoRadio:  Math.random() > 0.5 });
     
   });
-
-
   test("Logout", async ({ page }) => {
     await loginPage.logout();
     await expect(page).toHaveURL(/.*\/login$/);
   });
-
-
 });
