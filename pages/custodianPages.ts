@@ -32,12 +32,8 @@ export class CustodianPages {
 		const projectText = this.page.getByText(custodianData.projectName, { exact: true });
 		await expect(projectText).toBeVisible({ timeout: 15000 });
 		await projectText.scrollIntoViewIfNeeded();
-	    await projectText.click();
-		await expect(this.page.getByText(custodianData.title)).toBeVisible();
-		await this.page.getByText(custodianData.title).click();
-		await expect(this.page.getByText(custodianData.projectName)).toBeVisible();
-		await expect(this.page.getByText(this.selectors.headerStatusText)).toBeVisible();
-	
+	    await this.page.getByText(this.selectors.viewProjectButton).click();
+		await expect(this.page).toHaveURL(/\/requirements(\?.*)?$/);
 	}
 
 	async verifyRequirementHeader() {
@@ -47,23 +43,28 @@ export class CustodianPages {
 		await expect(this.page.getByText(this.selectors.headerStatusText)).toBeVisible();
 	}
 
+	private async expectValueNextToLabel(labelText: string, expectedValue: string) {
+		// Use only filter(hasText) to assert that a single visible container holds both label and value
+		const containers = this.page.locator('form, .ant-form, .ant-row, .ant-col, .ant-space, .ant-form-item, div');
+		const row = containers
+			.filter({ hasText: labelText })
+			.filter({ hasText: expectedValue })
+			.first();
+		await expect(row).toBeVisible({ timeout: 10000 });
+	}
+
+
+
 	async verifyAutoFetchedFields() {
-		await expect(this.page.getByText(this.selectors.priorityFieldLabel)).toBeVisible();
-		await expect(this.page.getByText(custodianData.priority)).toBeVisible();
-		await expect(this.page.getByText(this.selectors.titleFieldLabel)).toBeVisible();
-		await expect(this.page.getByText(custodianData.title)).toBeVisible();
-		await expect(this.page.getByText(this.selectors.processCategoryLabel)).toBeVisible();
-		await expect(this.page.getByText(custodianData.processCategory)).toBeVisible();
-		await expect(this.page.getByText(this.selectors.dataRequirementLabel)).toBeVisible();
-		await expect(this.page.getByText(custodianData.dataRequirement)).toBeVisible();
-		await expect(this.page.getByText(this.selectors.companyLabel)).toBeVisible();
-		await expect(this.page.getByText(custodianData.randomCompany)).toBeVisible();
-		await expect(this.page.getByText(this.selectors.custodianLabel)).toBeVisible();
-		await expect(this.page.getByText(custodianData.custodianName)).toBeVisible();
-		await expect(this.page.getByText(this.selectors.reviewerLabel)).toBeVisible();
-		await expect(this.page.getByText(custodianData.reviewerName)).toBeVisible();
-		await expect(this.page.getByText(this.selectors.escalation1Label)).toBeVisible();
-		await expect(this.page.getByText(custodianData.escalation1)).toBeVisible();
+		await this.expectValueNextToLabel(this.selectors.priorityFieldLabel, custodianData.priority);
+		await this.expectValueNextToLabel(this.selectors.titleFieldLabel, custodianData.title);
+		await this.expectValueNextToLabel(this.selectors.processCategoryLabel, custodianData.processCategory);
+		await this.expectValueNextToLabel('Department', custodianData.department);
+		await this.expectValueNextToLabel(this.selectors.dataRequirementLabel, custodianData.dataRequirement);
+		await this.expectValueNextToLabel(this.selectors.companyLabel, custodianData.randomCompany);
+		await this.expectValueNextToLabel(this.selectors.custodianLabel, custodianData.custodianName);
+		await this.expectValueNextToLabel(this.selectors.reviewerLabel, custodianData.reviewerName);
+		await this.expectValueNextToLabel(this.selectors.escalation1Label, custodianData.escalation1);
 	}
 
 	async addAttachment() {

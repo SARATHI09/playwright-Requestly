@@ -77,7 +77,7 @@
         "roleMenuLabel":"Role",
         "roleOptionCustodian":"Custodian",
         "headerProjectName":".header-project-name",
-        "headerStatusText":"Status: Requested",
+        "headerStatusText":"Status:Requested",
         "priorityFieldLabel":"Priority",
         "titleFieldLabel":"Requirement Title",
         "processCategoryLabel":"Process/Category",
