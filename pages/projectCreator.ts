@@ -8,6 +8,7 @@ import projectCreatorData from "../fixtures/resource/projectCreator.json";
 import { writeJSON } from "../utils/generateData";
 
 export class ProjectCreatorPage {
+  private login :Selectors["loginSelectors"]
   private selector: Selectors["projectCreatorSelectors"];
   private req: Selectors["requirementListSelectors"];
   private selectedCustodianName: string = '';
@@ -18,6 +19,7 @@ export class ProjectCreatorPage {
   constructor(private page: Page, selectors: Selectors) {
     this.selector = selectors.projectCreatorSelectors;
     this.req = selectors.requirementListSelectors;
+    this.login = selectors.loginSelectors;  
   }
 
   private shuffleArray<T>(array: T[]): T[] {
@@ -131,9 +133,10 @@ export class ProjectCreatorPage {
   }
 
   async createProject(projectData: ProjectCreationData, options?: { selectNoRadio?: boolean }) {
-
+    await this.page.locator(this.login.roleChange).click();
+    await this.page.locator(this.login.dropdown).getByText('Project Creator').click();
     // Step 0: Project Info
-    await this.page.getByText(this.selector.addProject).click();
+    await this.page.getByText(this.selector.addProject).first().click();
     await expect(this.page).toHaveURL(/.*\/projects\/add\?step=0$/);
 
     await this.page.getByPlaceholder(this.selector.projectName).fill(projectData.projectName);

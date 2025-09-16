@@ -5,4 +5,5 @@ export class Selectors {
     empCreation = common.createCompany
     projectCreatorSelectors = common.projectCreator
     requirementListSelectors = common.requirementList
+    editCustodianSelectors = common.editCustodian
 }

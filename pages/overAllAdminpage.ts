@@ -22,7 +22,7 @@ export class AdminRole {
     await this.page.getByText('Save').click();
     // await this.page.getByText('Cancel').click();
 
-    const employees = generateMultipleEmployees();
+    const employees = generateMultipleEmployees(6);
     for (const emp of employees) {
 
       const {empName,designation,email,roleSets,password}=emp

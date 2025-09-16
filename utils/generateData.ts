@@ -13,7 +13,7 @@ export const generateRandomString = (length: number): string => {
 };
 
 
-export function generateMultipleEmployees(count=10) {
+export function generateMultipleEmployees(count=6) {
   return Array.from({ length: count }, () => generateData());
 }
 
