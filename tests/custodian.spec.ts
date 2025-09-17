@@ -1,17 +1,22 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../pages/common";
 import { Selectors } from "../selectors";
-import rolesData from "../fixtures/resource/rolesData.json";
+import activateDetails from "../fixtures/resource/activateDetails.json";
+import custodianData from "../fixtures/resource/custodianData.json";
 import { CustodianPages } from "../pages/custodianPages";
 
 test.describe("Custodian Login", () => {
   const selector = new Selectors();
-  const email = "trystan828@yopmail.com";
-  const password = "Trystan@404";
+ 
   let loginPage: LoginPage;
   let custodian: CustodianPages;
+  const custodianName = custodianData.custodianName;
+  const custodianUser = (activateDetails as Array<{ empName: string; email: string; password: string }>).find((u) => u.empName === custodianName);
+  const email = custodianUser?.email ?? "";
+  const password = custodianUser?.password ?? "";
   
   test.beforeEach(async ({ page }) => {
+    
     await page.goto("http://13.126.213.18:4000/");
     loginPage = new LoginPage(page, selector);
     await loginPage.login(email, password);

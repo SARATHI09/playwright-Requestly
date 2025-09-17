@@ -16,6 +16,11 @@ export class ProjectCreatorPage {
   selectedProjectCreatorName: string = '';
   selectedRandomCompany: string = '';
   selectedReviewerName: string = '';
+  projectstartdate: any;
+  enddate: any;
+  duedate: any;
+  reviewerduedate: any;
+  
   constructor(private page: Page, selectors: Selectors) {
     this.selector = selectors.projectCreatorSelectors;
     this.req = selectors.requirementListSelectors;
@@ -62,6 +67,7 @@ export class ProjectCreatorPage {
     }
     throw new Error(`No valid team member found in dropdown. Tried all ${shuffledEmpNames.length} names: ${shuffledEmpNames.join(', ')}`);
   }
+  
   private async selectCustodian(): Promise<string> {
     // Read from projectCreator.json C array (simpler structure)
     const allEmpNames = projectCreatorData.C.map(item => item.empName);
@@ -125,11 +131,19 @@ export class ProjectCreatorPage {
     }
     throw new Error(`No valid project creator found in dropdown. Tried: ${shuffledEmpNames.join(', ')}`);
   }
+  
   async selectDate(daysFromToday: number = 0) {
     const targetDate = new Date();
     targetDate.setDate(targetDate.getDate() + daysFromToday);
     const dateToClick = targetDate.getDate().toString();
     await this.page.getByText(dateToClick, { exact: true }).click();
+    return targetDate; // Return the date object
+  }
+  private formatDateToDDMMYYYY(date: Date): string {
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
   }
 
   async createProject(projectData: ProjectCreationData, options?: { selectNoRadio?: boolean }) {
@@ -138,7 +152,6 @@ export class ProjectCreatorPage {
     // Step 0: Project Info
     await this.page.getByText(this.selector.addProject).first().click();
     await expect(this.page).toHaveURL(/.*\/projects\/add\?step=0$/);
-
     await this.page.getByPlaceholder(this.selector.projectName).fill(projectData.projectName);
     // Select project group - click dropdown and then + Add new Project Group
     await this.page.getByRole('combobox').filter({ hasText: this.selector.projectGroup }).click();
@@ -149,9 +162,9 @@ export class ProjectCreatorPage {
     await expect(this.page.getByText("Succesfully created Project Group")).toBeVisible();
     // Select dates
     await this.page.getByRole('textbox', { name: this.selector.startDate }).click();
-    await this.page.getByRole('button', { name: 'Today' }).click();
+    this.projectstartdate = await this.selectDate(1);
     await this.page.getByRole('textbox', { name: this.selector.endDate }).click();
-    await this.selectDate(2);
+    this.enddate = await this.selectDate(2);
     await this.page.getByPlaceholder(this.selector.projectDescription).fill(projectData.description);
     // Select random company from rolesData.json P[] array
     const randomCompany = this.selectRandomCompanyFromP();
@@ -162,8 +175,7 @@ export class ProjectCreatorPage {
     // Step 1: Project Team
     await this.page.getByText(this.selector.addPeople).nth(1).click();
     await this.page.getByRole('combobox').click();
-    const projectCreatorName = await this.selectProjectCreator();
-    this.selectedProjectCreatorName = projectCreatorName;
+    this.selectedProjectCreatorName = await this.selectProjectCreator();
     await this.page.getByRole('button', { name: this.selector.addTeamMember }).nth(1).click();
     await expect(this.page.getByText('Project Team added succesfully')).toBeVisible();
     await this.page.getByText(this.selector.nextButton).click();
@@ -186,6 +198,7 @@ export class ProjectCreatorPage {
     await this.addRequirementRandomly(reqData);
     await this.writeCustodianData(projectData, reqData);
   }
+  
   async addRequirementRandomly(data: RequirementData) {
     await expect(this.page.getByText(this.req.headerProjectInfo)).toBeVisible();
     // Requirement Title
@@ -195,7 +208,7 @@ export class ProjectCreatorPage {
     await this.page.getByRole('option', { name: data.priority }).click();
     // Due Date
     await this.page.getByRole('textbox', { name: this.req.dueDatePlaceholder }).first().click();
-    await this.selectDate(1)
+    this.duedate = await this.selectDate(1);
     // Process/Category
     await this.page.getByPlaceholder(this.req.processCategory).fill(data.processCategory);
     // Department
@@ -204,27 +217,24 @@ export class ProjectCreatorPage {
     await this.page.locator(this.req.dataRequirement).fill(data.dataRequirement);
     // Company
     await this.page.getByRole('combobox').filter({ hasText: this.req.companyDropdown }).click();
-    const randomCompany = this.selectRandomCompanyFromP();
-    this.selectedRandomCompany = randomCompany;
-    await this.page.getByRole('option', { name: randomCompany }).click();
+    this.selectedRandomCompany =  this.selectRandomCompanyFromP();
+    await this.page.getByRole('option', { name:  this.selectedRandomCompany }).click();
     // Custodian - use random selection from C array
     await this.page.getByRole('combobox').filter({ hasText: this.req.custodianDropdown }).click();
-    const custodianName = await this.selectCustodian();
-    this.selectedCustodianName = custodianName;
+    this.selectedCustodianName = await this.selectCustodian();
     // Reviewer - use random selection from R array
     await this.page.getByRole('combobox').filter({ hasText: this.req.reviewerDropdown }).click();
-    const reviewerName = await this.selectReviewer();
-    this.selectedReviewerName = reviewerName;
+    this.selectedReviewerName =  await this.selectReviewer();
     // Reviewer Due Date
     await this.page.getByPlaceholder(this.req.reviewerDueDatePlaceholder).last().click();
-    await this.page.getByText(String(data.reviewerDueDateDay ?? 15)).click();
+    this.reviewerduedate = await this.selectDate(3);
     // Escalations - use the selected teamMemberName from activateDetails.json
     await this.page.getByRole('combobox').filter({ hasText: this.req.escalation1 }).click();
-    const escalation1 = await this.selectTeamMember();
-    this.selectedEscalation1Name = escalation1;
+    this.selectedEscalation1Name  = await this.selectTeamMember();
     // Click header Request button
     await this.page.getByRole('button', { name: this.req.requestButton }).click();
   }
+  
   private async writeCustodianData(projectData: ProjectCreationData, reqData: RequirementData): Promise<void> {
     const custodianData = {
       projectName: projectData.projectName,
@@ -239,10 +249,12 @@ export class ProjectCreatorPage {
       dataRequirement: reqData.dataRequirement,
       custodianName: this.selectedCustodianName,
       reviewerName: this.selectedReviewerName,
-      escalation1: this.selectedEscalation1Name
-
+      escalation1: this.selectedEscalation1Name,
+      startdate: this.formatDateToDDMMYYYY(this.projectstartdate),
+      enddate: this.formatDateToDDMMYYYY(this.enddate),
+      duedate: this.formatDateToDDMMYYYY(this.duedate),
+      reviewerdate: this.formatDateToDDMMYYYY(this.reviewerduedate),
     };
-    // Write to custodianData.json
     writeJSON("fixtures/resource/custodianData.json", custodianData);
   }
 }
