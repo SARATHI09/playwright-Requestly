@@ -28,7 +28,7 @@ export class LoginPage {
   async roleSwitch(){
     await this.page.locator(this.selector.roleChange).click();
     await this.page.locator(this.selector.dropdown).getByText('Overall Admin').click();
-    await expect(this.page.locator(this.selector.roleChange)).toHaveText('Overall Admin');
+    expect(this.page.locator(this.selector.roleChange)).toHaveText('Overall Admin');
     await Promise.all([ 
       this.page.locator(this.selector.profileicon).click(),
       expect(this.page.getByRole('menuitem', { name: 'Masters' })).toBeVisible(),

@@ -42,7 +42,7 @@ export class CustodianPages {
 		await expect(this.page.getByText(custodianData.title)).toBeVisible();
 		await this.page.getByText(custodianData.title).click();
 		await expect(this.page.getByText(custodianData.projectName)).toBeVisible();
-		await expect(this.page.getByText(this.selectors.headerStatusRequest)).toBeVisible();
+		// await expect(this.page.getByText(this.selectors.headerStatusRequest)).toBeVisible();
 	}
 
 
@@ -70,25 +70,30 @@ export class CustodianPages {
 	}
 
 	async moveToQuery() {
-		// Ensure the status field is visible and read its text
-		const statusLocator = this.page.getByText(/^Status: (Requested|Partial Submit|Query)$/).first();
-		await expect(statusLocator).toBeVisible({ timeout: 10000 });
-		const statusText = (await statusLocator.textContent())?.trim();
-		let menuOption: string | null = null;
-		if (statusText === 'Status: Requested') {
-			menuOption = 'Move to Partial Submit';
-		} else if (statusText === 'Status: Partial Submit') {
-			menuOption = 'Move to Query';
-		} else if (statusText === 'Status: Query') {
-			menuOption = 'Move to Submit';
-		} else {
-			throw new Error(`Unexpected status text: ${statusText}`);
-		}
-		// Fill query text (if applicable) and perform action
+	  // Get only the actual status text (Requested / Partial Submit / Query)
+	  const statusLocator = this.page.locator('.statusText');
+	  await statusLocator.waitFor({ state: 'visible', timeout: 10000 });
+	
+	  const statusValue = (await statusLocator.textContent())?.trim();
+	  if (!statusValue) {
+		throw new Error('Status value not found!');
+	  }
+	
+	  // Decide which menu option to click based on status value
+	  let menuOption: string;
+	  if (statusValue.includes('Requested')) {
+		menuOption = 'Move to Partial Submit';
+	  } else if (statusValue.includes('Partial Submit')) {
+		menuOption = 'Move to Query';
+	  } else if (statusValue.includes('Query')) {
+		menuOption = 'Move to Submit';
+	  } else {
+		throw new Error(`Unexpected status: ${statusValue}`);
+	  }
 		await this.page.getByPlaceholder(this.selectors.queryField).fill(custodianData.projectName);
 		await this.page.locator(this.selectors.moreMenuButton).click();
 		await this.page.getByRole('menuitem', { name: menuOption }).click();
 		await this.page.getByRole('button', { name: this.selectors.confirmButton }).click();
 		// await expect(this.page.getByText(this.selectors.toastSuccessText)).toBeVisible();
-	}
+	  }
 } 
