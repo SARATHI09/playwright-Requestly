@@ -11,14 +11,12 @@ export class CustodianPages {
 		this.loginSelectors = selectors.loginSelectors;
 		this.req = selectors.requirementListSelectors;
 	}
-
 	async switchToCustodianRole() {
 		await this.page.locator(this.loginSelectors.profileicon).click();
 		await this.page.locator(this.loginSelectors.roleChange).click();
 		await this.page.locator(this.loginSelectors.dropdown).getByText(this.selectors.roleOptionCustodian).click();
 		await expect(this.page.locator(this.loginSelectors.roleChange)).toHaveText(this.selectors.roleOptionCustodian);
 	}
-
 	async searchAndOpenProjectGroup() {
 		const searchBox = this.page.locator("input[placeholder*='Search']");
 		await searchBox.fill(custodianData.projectGroupName);
@@ -26,7 +24,6 @@ export class CustodianPages {
 		await expect(this.page.getByText(custodianData.projectGroupName)).toBeVisible({ timeout: 10000 });
 		await this.page.getByText(custodianData.projectGroupName, { exact: true }).first().click();
 	}
-
 	async searchAndOpenProject() {
 		const searchBox = this.page.locator("input[placeholder*='Search']");
 		await searchBox.fill(custodianData.projectName);
@@ -37,16 +34,12 @@ export class CustodianPages {
 	    await this.page.getByText(this.selectors.viewProjectButton).click();
 		await expect(this.page).toHaveURL(/\/requirements(\?.*)?$/);
 	}
-
 	async verifyRequirementHeader() {
 		await expect(this.page.getByText(custodianData.title)).toBeVisible();
 		await this.page.getByText(custodianData.title).click();
 		await expect(this.page.getByText(custodianData.projectName)).toBeVisible();
 		// await expect(this.page.getByText(this.selectors.headerStatusRequest)).toBeVisible();
 	}
-
-
-
 	async verifyAutoFetchedFields() {
 		await expect (this.page.getByRole('combobox').filter({ hasText: this.req.priorityDropdown })).toContainText(custodianData.priority);
 		await expect(this.page.getByPlaceholder('Requirement Title')).toHaveValue(custodianData.title);
@@ -60,7 +53,6 @@ export class CustodianPages {
 		await expect(this.page.getByPlaceholder(this.req.reviewerDueDatePlaceholder).last()).toHaveValue(custodianData.reviewerdate);
 		await expect(this.page.getByRole('combobox').filter({ hasText: this.req.escalation1 })).toContainText(custodianData.escalation1);
 	}
-
 	async addAttachment() {
 		await this.page.getByRole('button', { name: this.selectors.attachmentButton }).first().click();
 		await this.page.getByPlaceholder(this.selectors.attachmentDescription).fill(custodianData.dataRequirement);
@@ -68,7 +60,6 @@ export class CustodianPages {
 		await this.page.setInputFiles(this.selectors.fileInput, filePath);
 		await this.page.getByRole('button', { name: this.selectors.saveButton }).click();
 	}
-
 	async moveToQuery() {
 	  // Get only the actual status text (Requested / Partial Submit / Query)
 	  const statusLocator = this.page.locator('.statusText');
@@ -78,7 +69,6 @@ export class CustodianPages {
 	  if (!statusValue) {
 		throw new Error('Status value not found!');
 	  }
-	
 	  // Decide which menu option to click based on status value
 	  let menuOption: string;
 	  if (statusValue.includes('Requested')) {
