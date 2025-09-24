@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SBI Cheque</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #e6f3f8;
+      padding: 30px;
+    }
+    .cheque {
+      width: 1150px;
+      height: 520px;
+      background: #e6f3f8;
+      border: 1px solid #000;
+      padding: 20px 40px;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .bank-info {
+      display: flex;
+      align-items: center;
+    }
+    .bank-logo {
+      width: 60px;
+      height: 60px;
+      background-color: #004b8d;
+      border-radius: 50%;
+      margin-right: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 28px;
+    }
+    .bank-name {
+      line-height: 1.4;
+    }
+    .branch-info {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .date {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      text-align: right;
+    }
+    .date-number {
+      font-size: 28px;
+      letter-spacing: 5px;
+    }
+    .date-label {
+      font-size: 14px;
+      margin-top: -5px;
+    }
+    .pay-section {
+      margin-top: 70px;
+    }
+    .pay-section b {
+      font-size: 16px;
+    }
+    .payee-name {
+      font-size: 26px;
+      font-weight: bold;
+      margin: 5px 0;
+      color: #004b8d;
+    }
+    .amount-words {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1e5162;
+    }
+    .right-box {
+      position: absolute;
+      top: 200px;
+      right: 40px;
+      width: 200px;
+      height: 100px;
+      border: 2px solid black;
+      text-align: center;
+      padding: 10px;
+      background-color: white;
+    }
+    .right-box .hindi {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .right-box .amt {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    .or-bearer {
+      position: absolute;
+      left: 680px;
+      top: 320px;
+      font-size: 16px;
+    }
+    .ac-info {
+      margin-top: 60px;
+      display: flex;
+      align-items: flex-start;
+    }
+    .ac-block {
+      border: 2px solid black;
+      width: 350px;
+      height: 60px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 20px;
+      margin-right: 20px;
+      background: #fff;
+    }
+    .ac-label {
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+    .ac-meta {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    .account-left {
+      margin-right: 60px;
+    }
+    .note {
+      font-size: 14px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .sign-block {
+      position: absolute;
+      right: 40px;
+      bottom: 50px;
+      text-align: center;
+    }
+    .sign-line {
+      border-top: 2px solid black;
+      width: 200px;
+      margin-bottom: 5px;
+    }
+    .footer {
+      position: absolute;
+      bottom: 5px;
+      left: 40px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 18px;
+      letter-spacing: 5px;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="cheque">
+    <div class="header">
+      <div class="bank-info">
+        <div class="bank-logo">🏦</div>
+        <div class="bank-name">
+          <strong>भारतीय स्टेट बैंक</strong><br>
+          <strong>State Bank Of India</strong>
+        </div>
+      </div>
+      <div class="branch-info">
+        (75746) SHINAR<br>
+        (SHRAE DISTI SURDASPUR)<br>
+        PUNJAB 491005<br>
+        Tel: 1871287777<br>
+        Fax: 1267777<br>
+        IFS CODE: SBIN0001234
+ 
+ 
+      </div>
+    </div>
+    <div class="date">
+      <div class="date-number">23042024</div>
+      <div class="date-label">DD MM YYYY</div>
+    </div>
+ 
+    <div class="pay-section">
+      <b>PAY</b>
+      <div class="payee-name">BASKAR</div>
+      <div class="amount-words"> Six Lakhs Sixty Three Thousannds one Twenty Five Rupeess only</div>
+    </div> 
+ 
+    <div class="right-box">
+      <div class="hindi">अंक</div>
+      <div class="amt">₹ 6,63,125/-</div>
+    </div>
+ 
+    <div class="or-bearer">या धारक को / OR BEARER</div>
+ 
+    <div class="ac-info">
+      <div class="account-left">
+        <div class="ac-label">खा. सं<br>AC No</div>
+        <div class="ac-block">10020030040050</div>
+      </div>
+      <div class="account-right">
+        <div class="ac-meta">
+          SAVINGS A/C<br>
+          PREFIX:<br>
+          [Prefix Number]
+        </div>
+      </div>
+      <div style="margin-left: 50px; font-size: 14px; font-weight: bold;">
+        VALID UPTO ₹10 LACS AT<br>
+        NON-HOME BRANCH
+      </div>
+    </div>
+ 
+    <div class="note">
+      MULTI-CITY CHEQUE Payable at Par at All Branches of SBI
+    </div>
+ 
+    <div class="footer">
+      "120270" 430023411 000052 31
+    </div>
+ 
+    <div class="sign-block">
+      <div class="sign-line"></div>
+      <div><strong>sarath</strong><br><span style="font-size: 14px;">Please sign above</span></div>
+    </div>
+  </div>
+</body>
+</html>
+ 

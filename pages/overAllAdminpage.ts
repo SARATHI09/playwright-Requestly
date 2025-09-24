@@ -71,15 +71,11 @@ export class AdminRole {
 
       for (const role of roleArray) {
         const key = roleMap[role];
-        if (key && rolesData[key]) {
-          rolesData[key].push(empObj);
-        }
-
         if (key && projectCreatorData[key]) {
           projectCreatorData[key].push({
             empName,
-            company: companyName
-          });
+            companyName
+        });
         }
     }
     writeJSON("fixtures/resource/rolesData.json",rolesData );

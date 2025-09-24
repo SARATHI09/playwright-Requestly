@@ -32,7 +32,7 @@ export default defineConfig({
     
     navigationTimeout: 30000,  // per test
     actionTimeout: 15000,
-    headless: false,
+    headless: true,
 
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://localhost:3000',
