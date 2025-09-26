@@ -33,15 +33,13 @@ export function generateData() {
   let designationOptions= ["Trainee","Manager","Tester","Auditor","MD"];
   const designation = designationOptions[Math.floor(Math.random() * designationOptions.length)];
   const role= ["Project Creator","Reviewer","Custodian","Management","Overall Admin"]; 
-  const roleSets = Math.random() < 0.3
-  ? role[Math.floor(Math.random() * role.length)] 
-  : Array.from(
-      new Set(
-        Array.from({ length: Math.floor(Math.random() * (role.length - 1)) + 2 },
-          () => role[Math.floor(Math.random() * role.length)]
-        )
-      )
-    );
+  const roleSets = Math.random() < 0.2
+    ?   role[Math.floor(Math.random() * role.length)]
+    : (() => {
+        const shuffled = [...role].sort(() => Math.random() - 0.5);
+        const count = Math.floor(Math.random() * (role.length - 1)) + 2;
+        return shuffled.slice(0, count);
+      })();
    return{
     companyName,
     country,
@@ -61,8 +59,6 @@ export interface RequirementData {
   processCategory: string;
   department: string;
   dataRequirement: string;
-  dueDateDay?: number; // calendar day to click, default 15
-  reviewerDueDateDay?: number; // calendar day to click, default 15
 }
 
 export function generateRequirementData(): RequirementData {
@@ -72,9 +68,7 @@ export function generateRequirementData(): RequirementData {
   const processCategory = faker.commerce.department().toLowerCase();
   const department = faker.commerce.productAdjective().toLowerCase();
   const dataRequirement = faker.lorem.words({ min: 3, max: 7 });
-  const dueDateDay = 15;
-  const reviewerDueDateDay = 15;
-  return { title, priority, processCategory, department, dataRequirement, dueDateDay, reviewerDueDateDay };
+  return { title, priority, processCategory, department, dataRequirement};
 }
 
 export interface ProjectCreationData {

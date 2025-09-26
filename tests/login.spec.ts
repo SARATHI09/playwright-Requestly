@@ -30,8 +30,6 @@ test.describe("Forgot Password", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
     loginPage = new LoginPage(page, selector);
-
-
   });
 
 });

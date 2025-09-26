@@ -1,13 +1,14 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../pages/common";
 import { Selectors } from "../selectors";
-import rolesData from "../fixtures/resource/rolesData.json";
-
+import activateDetails from "../fixtures/resource/activateDetails.json";
+import custodianData from "../fixtures/resource/custodianData.json";
 test.describe("Reviewer Login", () => {
   const selector = new Selectors();
-  const reviewerData = rolesData.R[0][0];
-  const email = reviewerData.email;
-  const password = reviewerData.password;
+  const reviewerName = custodianData.reviewerName;
+  const reviewerUser = (activateDetails as Array<{ empName: string; email: string; password: string }>).find((u) => u.empName === reviewerName);
+  const email = reviewerUser?.email ?? "";
+  const password = reviewerUser?.password ?? "";
   let loginPage: LoginPage;
   
   test.beforeEach(async ({ page }) => {
