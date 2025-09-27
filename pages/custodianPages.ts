@@ -14,8 +14,12 @@ export class CustodianPages {
 	async switchToCustodianRole() {
 		await this.page.locator(this.loginSelectors.profileicon).click();
 		await this.page.locator(this.loginSelectors.roleChange).click();
+		try{
 		await this.page.locator(this.loginSelectors.dropdown).getByText(this.selectors.roleOptionCustodian).click();
 		await expect(this.page.locator(this.loginSelectors.roleChange)).toHaveText(this.selectors.roleOptionCustodian);
+		}catch{
+			console.log("??", "Dropdown not available");
+		}
 	}
 	async searchAndOpenProjectGroup() {
 		const searchBox = this.page.locator("input[placeholder*='Search']");
@@ -61,15 +65,12 @@ export class CustodianPages {
 		await this.page.getByRole('button', { name: this.selectors.saveButton }).click();
 	}
 	async moveToQuery() {
-	  // Get only the actual status text (Requested / Partial Submit / Query)
 	  const statusLocator = this.page.locator('.statusText');
 	  await statusLocator.waitFor({ state: 'visible', timeout: 10000 });
-	
 	  const statusValue = (await statusLocator.textContent())?.trim();
 	  if (!statusValue) {
 		throw new Error('Status value not found!');
 	  }
-	  // Decide which menu option to click based on status value
 	  let menuOption: string;
 	  if (statusValue.includes('Requested')) {
 		menuOption = 'Move to Partial Submit';

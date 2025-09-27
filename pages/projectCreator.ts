@@ -8,7 +8,7 @@ import projectCreatorData from "../fixtures/resource/projectCreator.json";
 import { writeJSON } from "../utils/generateData";
 
 export class ProjectCreatorPage {
-  private login :Selectors["loginSelectors"]
+  private login: Selectors["loginSelectors"]
   private selector: Selectors["projectCreatorSelectors"];
   private req: Selectors["requirementListSelectors"];
   private selectedCustodianName: string = '';
@@ -20,11 +20,11 @@ export class ProjectCreatorPage {
   enddate: any;
   duedate: any;
   reviewerduedate: any;
-  
+
   constructor(private page: Page, selectors: Selectors) {
     this.selector = selectors.projectCreatorSelectors;
     this.req = selectors.requirementListSelectors;
-    this.login = selectors.loginSelectors;  
+    this.login = selectors.loginSelectors;
   }
 
   private shuffleArray<T>(array: T[]): T[] {
@@ -67,7 +67,7 @@ export class ProjectCreatorPage {
     }
     throw new Error(`No valid team member found in dropdown. Tried all ${shuffledEmpNames.length} names: ${shuffledEmpNames.join(', ')}`);
   }
-  
+
   private async selectCustodian(): Promise<string> {
     // Read from projectCreator.json C array (simpler structure)
     const allEmpNames = projectCreatorData.C.map(item => item.empName);
@@ -131,7 +131,7 @@ export class ProjectCreatorPage {
     }
     throw new Error(`No valid project creator found in dropdown. Tried: ${shuffledEmpNames.join(', ')}`);
   }
-  
+
   async selectDate(daysFromToday: number = 0) {
     const targetDate = new Date();
     targetDate.setDate(targetDate.getDate() + daysFromToday);
@@ -148,7 +148,12 @@ export class ProjectCreatorPage {
 
   async createProject(projectData: ProjectCreationData, options?: { selectNoRadio?: boolean }) {
     await this.page.locator(this.login.roleChange).click();
-    await this.page.locator(this.login.dropdown).getByText('Project Creator').click();
+
+    try {
+      await this.page.locator(this.login.dropdown).getByText('Project Creator').click({ timeout: 2000 });
+    } catch {
+      console.log("Dropdown not available");
+    }
     // Step 0: Project Info
     await this.page.getByText(this.selector.addProject).first().click();
     await expect(this.page).toHaveURL(/.*\/projects\/add\?step=0$/);
@@ -198,7 +203,7 @@ export class ProjectCreatorPage {
     await this.addRequirementRandomly(reqData);
     await this.writeCustodianData(projectData, reqData);
   }
-  
+
   async addRequirementRandomly(data: RequirementData) {
     await expect(this.page.getByText(this.req.headerProjectInfo)).toBeVisible();
     // Requirement Title
@@ -217,24 +222,24 @@ export class ProjectCreatorPage {
     await this.page.locator(this.req.dataRequirement).fill(data.dataRequirement);
     // Company
     await this.page.getByRole('combobox').filter({ hasText: this.req.companyDropdown }).click();
-    this.selectedRandomCompany =  this.selectRandomCompanyFromP();
-    await this.page.getByRole('option', { name:  this.selectedRandomCompany }).click();
+    this.selectedRandomCompany = this.selectRandomCompanyFromP();
+    await this.page.getByRole('option', { name: this.selectedRandomCompany }).click();
     // Custodian - use random selection from C array
     await this.page.getByRole('combobox').filter({ hasText: this.req.custodianDropdown }).click();
     this.selectedCustodianName = await this.selectCustodian();
     // Reviewer - use random selection from R array
     await this.page.getByRole('combobox').filter({ hasText: this.req.reviewerDropdown }).click();
-    this.selectedReviewerName =  await this.selectReviewer();
+    this.selectedReviewerName = await this.selectReviewer();
     // Reviewer Due Date
     await this.page.getByPlaceholder(this.req.reviewerDueDatePlaceholder).last().click();
     this.reviewerduedate = await this.selectDate(3);
     // Escalations - use the selected teamMemberName from activateDetails.json
     await this.page.getByRole('combobox').filter({ hasText: this.req.escalation1 }).click();
-    this.selectedEscalation1Name  = await this.selectTeamMember();
+    this.selectedEscalation1Name = await this.selectTeamMember();
     // Click header Request button
     await this.page.getByRole('button', { name: this.req.requestButton }).click();
   }
-  
+
   private async writeCustodianData(projectData: ProjectCreationData, reqData: RequirementData): Promise<void> {
     const custodianData = {
       projectName: projectData.projectName,

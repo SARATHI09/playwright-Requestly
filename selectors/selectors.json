@@ -95,5 +95,32 @@
         "moveToQueryOption":"Move to Query",
         "confirmButton":"Confirm",
         "toastSuccessText":"query Successfully"
+    },
+     "editReviewer":{
+        "roleOptionreviewer":"Reviewer",
+        "projectsSearch":"Search",
+        "projectCardTitle":".project-card-title",
+        "viewProjectButton":"View Project",
+        "roleMenuLabel":"Role",
+        "roleOptionCustodian":"Custodian",
+        "headerProjectName":".header-project-name",
+        "headerStatusRequest":"Status:Requested",
+        "priorityFieldLabel":"Priority",
+        "titleFieldLabel":"Requirement Title",
+        "processCategoryLabel":"Process/Category",
+        "dataRequirementLabel":"Data Requirement",
+        "companyLabel":"Company",
+        "custodianLabel":"Custodian",
+        "reviewerLabel":"Reviewer",
+        "escalation1Label":"Escalation 1",
+        "attachmentButton":"Attachment",
+        "attachmentDescription":"Description",
+        "fileInput":"input[type='file']",
+        "saveButton":"Save",
+        "queryField":"Type Text",
+        "moreMenuButton":"//i[@aria-label='icon: more']",
+        "moveToQueryOption":"Move to Query",
+        "confirmButton":"Confirm",
+        "toastSuccessText":"query Successfully"
     }
 }

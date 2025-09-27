@@ -6,4 +6,5 @@ export class Selectors {
     projectCreatorSelectors = common.projectCreator
     requirementListSelectors = common.requirementList
     editCustodianSelectors = common.editCustodian
+    editReviewerSelectors = common.editReviewer
 }

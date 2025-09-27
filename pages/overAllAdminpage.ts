@@ -5,7 +5,6 @@ import { generateMultipleEmployees } from "../utils/generateData";
 
 export class AdminRole {
   private company: Selectors["empCreation"]; 
-  private selector: Selectors["loginSelectors"]; 
   constructor(private page: Page,selectors:Selectors) {
     this.company = selectors.empCreation;
   }
@@ -22,7 +21,7 @@ export class AdminRole {
     await this.page.getByText('Save').click();
     // await this.page.getByText('Cancel').click();
 
-    const employees = generateMultipleEmployees(6);
+    const employees = generateMultipleEmployees(10);
     for (const emp of employees) {
 
       const {empName,designation,email,roleSets,password}=emp

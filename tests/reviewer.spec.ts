@@ -3,6 +3,7 @@ import { LoginPage } from "../pages/common";
 import { Selectors } from "../selectors";
 import activateDetails from "../fixtures/resource/activateDetails.json";
 import custodianData from "../fixtures/resource/custodianData.json";
+import { ReviewerPages } from "../pages/reviewerPages";
 test.describe("Reviewer Login", () => {
   const selector = new Selectors();
   const reviewerName = custodianData.reviewerName;
@@ -10,16 +11,24 @@ test.describe("Reviewer Login", () => {
   const email = reviewerUser?.email ?? "";
   const password = reviewerUser?.password ?? "";
   let loginPage: LoginPage;
+  let reviewer: ReviewerPages;
   
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
+    reviewer = new ReviewerPages(page, selector);
     loginPage = new LoginPage(page, selector);
+    console.log("??",email);
+    console.log("??",password);
     await loginPage.login(email, password);
     await expect(page).toHaveURL(/.*\/projects$/);
   });
 
   test("Logout", async ({ page }) => {
-    await loginPage.logout();
-    await expect(page).toHaveURL(/.*\/login$/);
+    await reviewer.switchToCustodianRole();
+    await reviewer.searchAndOpenProjectGroup();
+    await reviewer.searchAndOpenProject();
+    await reviewer.verifyRequirementHeader();
+    await reviewer.verifyAutoFetchedFields();
+    await reviewer.downloadDocument();
   });
 });

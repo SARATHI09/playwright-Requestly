@@ -13,7 +13,7 @@ export const generateRandomString = (length: number): string => {
 };
 
 
-export function generateMultipleEmployees(count=10) {
+export function generateMultipleEmployees(count=0) {
   return Array.from({ length: count }, () => generateData());
 }
 
@@ -34,7 +34,7 @@ export function generateData() {
   const designation = designationOptions[Math.floor(Math.random() * designationOptions.length)];
   const role= ["Project Creator","Reviewer","Custodian","Management","Overall Admin"]; 
   const roleSets = Math.random() < 0.2
-    ?   role[Math.floor(Math.random() * role.length)]
+    ? role[Math.floor(Math.random() * role.length)]
     : (() => {
         const shuffled = [...role].sort(() => Math.random() - 0.5);
         const count = Math.floor(Math.random() * (role.length - 1)) + 2;
