@@ -10,7 +10,7 @@ test.describe("Management Login", () => {
   const password = managementData.password;
   let loginPage: LoginPage;
   
-  test.afterEach(async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     await page.goto("/");
     loginPage = new LoginPage(page, selector);
     await loginPage.login(email, password);

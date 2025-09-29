@@ -7,7 +7,6 @@ import { CustodianPages } from "../pages/custodianPages";
 
 test.describe("Custodian Login", () => {
   const selector = new Selectors();
- 
   let loginPage: LoginPage;
   let custodian: CustodianPages;
   const custodianName = custodianData.custodianName;

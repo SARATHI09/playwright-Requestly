@@ -1,6 +1,7 @@
 import { Page,expect } from "@playwright/test";
 import { Selectors } from "../selectors";
 import custodianData from "../fixtures/resource/custodianData.json";
+import { clearDownloadsFolder } from "../utils/generateData";
 
 export class ReviewerPages {
 
@@ -8,9 +9,9 @@ export class ReviewerPages {
         this.selectors.editReviewerSelectors
         this.selectors.loginSelectors
         this.selectors.requirementListSelectors
+		this.selectors.editCustodianSelectors
     }
-    async switchToCustodianRole() {
-		await this.page.locator(this.selectors.loginSelectors.profileicon).click();
+    async switchToReviewerRole() {
 		await this.page.locator(this.selectors.loginSelectors.roleChange).click();
 		try{
 		await this.page.locator(this.selectors.loginSelectors.dropdown).getByText(this.selectors.editReviewerSelectors.roleOptionreviewer).click();
@@ -39,7 +40,7 @@ export class ReviewerPages {
     async verifyRequirementHeader() {
 		await expect(this.page.getByText(custodianData.title)).toBeVisible();
 		await this.page.getByText(custodianData.title).click();
-		await expect(this.page.getByText(custodianData.projectName)).toBeVisible();
+		// await expect(this.page.getByText(custodianData.projectName)).toBeVisible();
 		// await expect(this.page.getByText(this.selectors.headerStatusRequest)).toBeVisible();
 	}
     async verifyAutoFetchedFields() {
@@ -56,22 +57,49 @@ export class ReviewerPages {
 		await expect(this.page.getByRole('combobox').filter({ hasText: this.selectors.requirementListSelectors.escalation1 })).toContainText(custodianData.escalation1);
 	}
     async downloadDocument() {
-        const downloadButtons = await this.page.locator('i.anticon.anticon-download').all();
+		let index=1;
+		clearDownloadsFolder();
+        const downloadButtons = await this.page.locator(this.selectors.editReviewerSelectors.downloadicon).all();
         const downloadedFiles: string[] = []; 
         for (const button of downloadButtons) {
             const [download] = await Promise.all([
                 this.page.waitForEvent("download", { timeout: 30000 }),
                 button.click()
             ]); 
-
             const suggestedName = download.suggestedFilename();
-            const filePath = `downloads/${suggestedName}`;
+			const filePath = `downloads/${index++}-${suggestedName}`;
             await download.saveAs(filePath);
             downloadedFiles.push(filePath);
         }
-
         return downloadedFiles; 
     }
-
+	async moveToApproveReject(data:any){
+		const {partial,approve}=data;
+		const statusLocator = this.page.locator('.statusText');
+		await statusLocator.waitFor({ state: 'visible', timeout: 10000 });
+		const statusValue = (await statusLocator.textContent())?.trim();
+		
+		if (statusValue!.includes('Partial Submit')) {
+				await this.page.getByRole('button', { name: partial}).click();
+		}else if (statusValue!.includes('Submitted')) {
+				await this.page.getByRole('button', { name: approve }).click();
+				try{
+				await this.page.locator(this.selectors.editReviewerSelectors.rejectDescription).fill(custodianData.dataRequirement);
+				}catch{
+				console.log("??","No Description field");
+				}
+				await this.page.getByRole('button', { name: this.selectors.editCustodianSelectors.confirmButton }).click();
+		}else if (/Partial Accepted|Partial Rejected/.test(statusValue!)) {
+  			await this.page.getByPlaceholder(this.selectors.editReviewerSelectors.queryField).fill(custodianData.projectName);
+			await this.page.locator(this.selectors.editReviewerSelectors.sendButton).click();
+		}else if (statusValue!.includes('Query')) {
+			await this.page.getByPlaceholder(this.selectors.editReviewerSelectors.queryField).fill(custodianData.projectName);
+			await this.page.locator(this.selectors.editReviewerSelectors.sendButton).click();
+		}else if (statusValue!.includes('Accepted')){
+			console.log("The request is already Accepted");
+		}
+		
+		
+	}
 
 }

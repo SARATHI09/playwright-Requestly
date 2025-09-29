@@ -97,6 +97,12 @@
         "toastSuccessText":"query Successfully"
     },
      "editReviewer":{
+        "menuOption":"Move to Query",
+        "approveButton":"Accept",
+        "rejectButton":"Reject",
+        "partialApproveButton":"Partial Accept",
+        "partialRejectButton":"Partial Reject",
+        "sendButton":".query-text img.pointer",
         "roleOptionreviewer":"Reviewer",
         "projectsSearch":"Search",
         "projectCardTitle":".project-card-title",
@@ -121,6 +127,8 @@
         "moreMenuButton":"//i[@aria-label='icon: more']",
         "moveToQueryOption":"Move to Query",
         "confirmButton":"Confirm",
-        "toastSuccessText":"query Successfully"
+        "toastSuccessText":"query Successfully",
+        "downloadicon":"i.anticon.anticon-download",
+        "rejectDescription":".text-area ant-input"
     }
 }

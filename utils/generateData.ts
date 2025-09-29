@@ -7,16 +7,12 @@ export function writeJSON(filePath: string, data: any) {
 
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
 }
-
 export const generateRandomString = (length: number): string => {
   return Math.random().toString(36).substring(2, length + 2);
 };
-
-
 export function generateMultipleEmployees(count=0) {
   return Array.from({ length: count }, () => generateData());
 }
-
 export function generateProjectGroupName(): string {
   const data = generateData();
   return `${data.empName} ${data.designation} Group`;
@@ -75,15 +71,28 @@ export interface ProjectCreationData {
   projectName: string;
   projectGroupName: string;
   description: string;
-  companyName: string;
-  teamMemberName: string;
 }
 
 export function generateProjectCreationData(options?: { companyName?: string; teamMemberName?: string; }): ProjectCreationData {
   const projectName = `Test Project ${faker.word.noun()} ${faker.number.int({ min: 100, max: 999 })}`;
   const projectGroupName = `Test Group ${faker.word.adjective()} ${faker.number.int({ min: 100, max: 999 })}`;
   const description = faker.lorem.sentence(20).slice(0, 240);
-  const companyName = options?.companyName ?? 'Erdman and Sons';
   const teamMemberName = options?.teamMemberName ?? 'Aidan';
-  return { projectName, projectGroupName, description, companyName, teamMemberName };
+  return { projectName, projectGroupName, description};
+}
+
+export function clearDownloadsFolder(downloadsPath = "downloads") {
+  if (fs.existsSync(downloadsPath)) {
+    fs.readdirSync(downloadsPath).forEach(file => {
+      fs.unlinkSync(path.join(downloadsPath, file));
+    });
+  }
+}
+
+export function movetoSubmition(){
+  let partialoptions = ['Partial Accept','Partial Reject'];
+  const partial = partialoptions[Math.floor(Math.random()*partialoptions.length)]
+  let approveOptions = ['Accept','Reject'];
+  const approve = approveOptions[Math.floor(Math.random()*approveOptions.length)]
+  return {partial,approve};
 }

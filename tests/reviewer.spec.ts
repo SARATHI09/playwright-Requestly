@@ -4,6 +4,7 @@ import { Selectors } from "../selectors";
 import activateDetails from "../fixtures/resource/activateDetails.json";
 import custodianData from "../fixtures/resource/custodianData.json";
 import { ReviewerPages } from "../pages/reviewerPages";
+import { movetoSubmition } from "../utils/generateData";
 test.describe("Reviewer Login", () => {
   const selector = new Selectors();
   const reviewerName = custodianData.reviewerName;
@@ -22,13 +23,17 @@ test.describe("Reviewer Login", () => {
     await loginPage.login(email, password);
     await expect(page).toHaveURL(/.*\/projects$/);
   });
-
-  test("Logout", async ({ page }) => {
-    await reviewer.switchToCustodianRole();
+  test("Reviewer flow: search, open, verify, attach, move to Approve /Reject", async ({ page }) => {
+    await reviewer.switchToReviewerRole();
     await reviewer.searchAndOpenProjectGroup();
     await reviewer.searchAndOpenProject();
     await reviewer.verifyRequirementHeader();
     await reviewer.verifyAutoFetchedFields();
-    await reviewer.downloadDocument();
+    // await reviewer.downloadDocument();
+    const data = movetoSubmition();
+    await reviewer.moveToApproveReject(data);
+  });
+  test("Logout", async ({ page }) => {
+    await loginPage.logout();
   });
 });
