@@ -1,7 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
 dotenv.config(); 
-import './utils/locator-extensions';
+
+import './plugins/locator-plugin';
 export default defineConfig({
   testDir: './tests',
 

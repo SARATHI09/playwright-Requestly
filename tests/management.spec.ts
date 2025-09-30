@@ -3,7 +3,6 @@ import { LoginPage } from "../pages/common";
 import { Selectors } from "../selectors";
 import { ManagementPages } from "../pages/managementPages";
 import rolesData from "../fixtures/resource/rolesData.json";
-
 test.describe("Management Login", () => {
   const selector = new Selectors();
   const managementData = rolesData.M[0][0];
