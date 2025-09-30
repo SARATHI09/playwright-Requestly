@@ -6,10 +6,10 @@ import { clearDownloadsFolder } from "../utils/generateData";
 export class ReviewerPages {
 
     constructor(private page: Page, private selectors:Selectors){
-        this.selectors.editReviewerSelectors
-        this.selectors.loginSelectors
-        this.selectors.requirementListSelectors
-		this.selectors.editCustodianSelectors
+        // this.selectors.editReviewerSelectors
+        // this.selectors.loginSelectors
+        // this.selectors.requirementListSelectors
+		// this.selectors.editCustodianSelectors
     }
     async switchToReviewerRole() {
 		await this.page.locator(this.selectors.loginSelectors.roleChange).click();

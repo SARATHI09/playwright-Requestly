@@ -130,5 +130,8 @@
         "toastSuccessText":"query Successfully",
         "downloadicon":"i.anticon.anticon-download",
         "rejectDescription":".text-area ant-input"
+    }, "editManagement":{
+        "role":"Management"
+
     }
 }
