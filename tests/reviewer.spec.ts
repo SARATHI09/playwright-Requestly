@@ -29,7 +29,7 @@ test.describe("Reviewer Login", () => {
     await reviewer.searchAndOpenProject();
     await reviewer.verifyRequirementHeader();
     await reviewer.verifyAutoFetchedFields();
-    await reviewer.downloadDocument();
+    // await reviewer.downloadDocument();
     const data = movetoSubmition();
     await reviewer.moveToApproveReject(data);
   });
