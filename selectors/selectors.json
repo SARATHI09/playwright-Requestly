@@ -131,7 +131,11 @@
         "downloadicon":"i.anticon.anticon-download",
         "rejectDescription":".text-area ant-input"
     }, "editManagement":{
-        "role":"Management"
+        "role":"Management",
+        "projectChangefield":"Project Level Dashboard",
+        "project":"Projects",
+        "dropdown":"//ul[@role='listbox']   "
+
 
     }
 }

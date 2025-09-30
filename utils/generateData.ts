@@ -1,6 +1,26 @@
 import { faker } from '@faker-js/faker';
 import * as fs from "fs";
 import * as path from "path";
+import { Locator } from '@playwright/test';
+
+// Add safeClick to Locator prototype
+Locator.prototype['safeClick'] = async function (this: Locator) {
+  await this.scrollIntoViewIfNeeded();
+  await this.click();
+};
+
+// Add safeFill to Locator prototype
+Locator.prototype['safeFill'] = async function (this: Locator, value: string) {
+  await this.scrollIntoViewIfNeeded();
+  await this.fill(value);
+};
+
+declare module '@playwright/test' {
+  interface Locator {
+    safeClick(): Promise<void>;
+    safeFill(value: string): Promise<void>;
+  }
+}
 
 export function writeJSON(filePath: string, data: any) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });

@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
 dotenv.config(); 
-
+import './utils/locator-extensions';
 export default defineConfig({
   testDir: './tests',
 
@@ -19,7 +19,7 @@ export default defineConfig({
     
     navigationTimeout: 30000,  
     actionTimeout: 15000,
-    headless: false,
+    headless: true,
 
     trace: 'on-first-retry',
     launchOptions: {
