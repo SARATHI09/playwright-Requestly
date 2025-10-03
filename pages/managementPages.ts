@@ -1,10 +1,12 @@
 import { Page,expect } from "@playwright/test";
 import { Selectors } from "../selectors";
 import { CustodianPages } from "./custodianPages";	
+import { ReviewerPages } from "./reviewerPages";
 import custodianData from "../fixtures/resource/custodianData.json";
 
 export class ManagementPages{
 	private custodian :CustodianPages
+	private reviewer :ReviewerPages
     constructor(private page:Page,private selectors:Selectors){
         this.selectors.editManagementSelectors
 		this.selectors.editReviewerSelectors
@@ -12,6 +14,7 @@ export class ManagementPages{
         this.selectors.requirementListSelectors
 		this.selectors.editCustodianSelectors
 		this.custodian=new CustodianPages(page,selectors);
+		this.reviewer=new ReviewerPages(page,selectors);
     }
     async switchToManagementRole(){
 		await this.page.locator(this.selectors.loginSelectors.roleChange).click();
@@ -31,6 +34,7 @@ export class ManagementPages{
 		await this.page.getByRole('tab', { name: 'Requirement List' }).click();
 		await this.custodian.verifyRequirementHeader();
 		await this.custodian.verifyAutoFetchedFields();
+		await this.reviewer.downloadDocument();
 	}
 
 }
