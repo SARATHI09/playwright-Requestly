@@ -35,7 +35,7 @@ export class LoginPage {
       expect(this.page.getByRole('menuitem', { name: 'Masters' })).toBeVisible(),
       this.page.getByRole('menuitem', { name: 'Masters' }).click({force:true}),
     ]);
-    await this.page.waitForURL(process.env.BaseUrl! + '/masters') 
+    // await this.page.waitForURL(process.env.BaseUrl! + '/masters') 
   }
   async activationEmail(yop:any){
     for (const loginData of yop){

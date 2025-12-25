@@ -5,7 +5,6 @@ import * as path from "path";
 
 export function writeJSON(filePath: string, data: any) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
-
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
 }
 export const generateRandomString = (length: number): string => {

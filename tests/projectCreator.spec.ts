@@ -12,9 +12,9 @@ test.describe("Project Creator Login", () => {
   const password = projectCreatorData.password;
   let loginPage: LoginPage;
   let projectCreatorPage: ProjectCreatorPage;
-
+  const baseUrl = process.env.BaseUrl!;
   test.beforeEach(async ({ page }) => {
-    await page.goto("/");
+    await page.goto(baseUrl);
    loginPage = new LoginPage(page, selector);
     projectCreatorPage = new ProjectCreatorPage(page, selector);
     await loginPage.login(email, password);

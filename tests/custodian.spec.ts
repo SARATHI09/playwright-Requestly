@@ -13,8 +13,9 @@ test.describe("Custodian Login", () => {
   const custodianUser = (activateDetails as Array<{ empName: string; email: string; password: string }>).find((u) => u.empName === custodianName);
   const email = custodianUser?.email ?? "";
   const password = custodianUser?.password ?? "";
-  
+  // const url = process.env.BaseUrl!;
   test.beforeEach(async ({ page }) => {
+    // console.log("??",url );
     await page.goto("/");
     loginPage = new LoginPage(page, selector);
     await loginPage.login(email, password);

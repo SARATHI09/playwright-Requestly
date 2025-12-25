@@ -12,7 +12,7 @@ export class AdminRole {
   async overAllAdmin(data :any) {
     let rolesData: any = { P: [], C: [], R: [], O: [], M: [] };
     let details: any[] = [];
-     let projectCreatorData: any = { P: [], C: [], R: [], O: [], M: [] }; 
+    let projectCreatorData: any = { P: [], C: [], R: [], O: [], M: [] }; 
     const {companyName,country}=data
     await this.page.getByText('+ Add Company').click();
     await this.page.getByPlaceholder('Company Name').fill(companyName);
@@ -21,9 +21,8 @@ export class AdminRole {
     await this.page.getByText('Save').click();
     // await this.page.getByText('Cancel').click();
 
-    const employees = generateMultipleEmployees(10);
+    const employees = generateMultipleEmployees(8);
     for (const emp of employees) {
-
       const {empName,designation,email,roleSets,password}=emp
       // await this.page.reload();  
       await this.page.getByText('Employee Master').click();
@@ -64,7 +63,7 @@ export class AdminRole {
       const roleArray = Array.isArray(roleSets) ? roleSets : [roleSets];
       const firstRole = roleArray[0];
       const key = roleMap[firstRole];
-      if (key && rolesData[key]) {
+      if (key) {
         rolesData[key].push(empObj); 
       }
 
