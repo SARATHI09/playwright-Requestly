@@ -1,70 +1,50 @@
 ---
-name: ERPNext Custom App — Issue (Agent Ready)
-about: High-level issue template for @claude to reproduce, fix/build safely, and raise a PR to our main branch.
-title: "[Bug|Enhancement|Feature] <clear title>"
-labels: ["needs-triage"]
+title: "ERPNext Custom App"
+description: "Template for creating ERPNext custom applications"
 ---
 
-# 1) Issue Summary
-**One-liner:** <what's wrong / what's needed>  
-**Business impact:** <who is affected + severity + frequency + workaround (if any)>
+## Section 1
 
-# 2) Scope & Safety (Must Not Break)
-**In scope:** <modules/doctype/feature that must change>  
-**Out of scope:** <explicitly what should NOT be touched>  
-**Must not break flows:**  
-1. <flow 1>  
-2. <flow 2>  
-3. <flow 3>
+Content for section 1 goes here...
 
-# 3) Expected vs Actual
-**Expected (functional contract):**
-- When <trigger>, given <preconditions>, system must: <rule bullets>
+---
 
-**Actual:**
-- <what happens today + visible symptom/error>
+## Section 2
 
-# 4) Reproduction (Deterministic)
-**Preconditions / Setup:** <company/site/user role/config/master data>  
-**Steps:**
-1. <step>
-2. <step>
-3. <step>
+Content for section 2 goes here...
 
-**Observed result:** <…>  
-**Expected result:** <…>
+---
 
-# 5) Evidence
-**Doc links/IDs:** <DocType: DocName>  
-**Screenshots/recording:** <attached?>  
-**Logs/traceback (redact secrets):**
-```text
-<paste here>
-```
+## Section 3
 
-# 6) Environment
+Content for section 3 goes here...
 
-* ERPNext: v15.80.1 (version-15)
-* Frappe: v15.83.0 (version-15)
-* Custom app: kaynes
+---
 
-# 7) Acceptance Criteria
+## Section 4
 
-* [ ] Repro now matches expected behavior
-* [ ] Tests added/updated (unit/integration where applicable)
-* [ ] Regression checked for "Must not break" flows
-* [ ] No new errors/tracebacks; permissions remain correct
+Content for section 4 goes here...
 
-# 8) Repo Branching & PR Policy (MANDATORY)
+---
 
-**Our main branch:** `feat/wo-fg-from-development`
+## Section 5
 
-@claude must:
+Content for section 5 goes here...
 
-1. Create a new branch **from** `feat/wo-fg-from-development`
-2. Commit changes to the new branch only
-3. Raise PR **to** `feat/wo-fg-from-development` (base branch)
-4. Never open PRs to `main` / `master`
+---
 
-**Branch name convention:** `claude/issue-<issue_number>-<short-slug>`
-**PR must include:** summary, root cause, fix approach, tests run + results, regression notes.
+## Section 6
+
+Content for section 6 goes here...
+
+---
+
+## Section 7
+
+Content for section 7 goes here...
+
+---
+
+## Section 8
+
+Content for section 8 goes here...
